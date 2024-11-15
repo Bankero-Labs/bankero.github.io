@@ -378,7 +378,7 @@ overflow-y: auto !important;
       <div class="hero-wrapper">
         <div id="w-node-_4cc3e3e7-e4d6-e5a9-1be7-58812dded59f-e7ed8ca4" class="hero-content">
           <div class="hero__form w-form">
-            <form id="form" name="wf-form-Form" data-name="Form" method="get" class="form" data-wf-page-id="6735aef6a4386af9e7ed8ca4" data-wf-element-id="5b67c72c-36b3-8112-9a0c-205d9628a53a">
+            <form id="form" name="wf-form-Form" data-name="Form" method="POST" class="form" data-wf-page-id="6735aef6a4386af9e7ed8ca4" data-wf-element-id="5b67c72c-36b3-8112-9a0c-205d9628a53a" onsubmit="sendEmail(event)">
               <h1 class="heading">Reimagine Banking, Anytime, Anywhere<br></h1>
               <p class="hero__paragraph">Experience a new way to manage your money that&#x27;s simple, transparent, and built for you. Send and receive money <strong>internationally</strong> with no hidden fees, <strong>grow</strong> your savings, invest your money effortlessly, and access fair <strong>credit</strong> options—all from your mobile phone or <strong>computer</strong>.<br></p>
               <div class="form-grid">
@@ -386,10 +386,28 @@ overflow-y: auto !important;
               </div>
               <div class="hero__note">
                 <div class="note__icon"><img src="images/clock.svg" loading="lazy" alt=""></div>
-                <div class="text-block">Sign Up for Early Access<br></div>
+                <div id="status-text" class="text-block">Sign Up for Early Access<br></div>
               </div>
             </form>
-            <div class="success-message w-form-done"></div>
+            <div class="success-message w-form-done">Request sent successfully!</div>
+            <script>
+              function sendEmail(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('Email').value;
+                const statusText = document.getElementById('status-text');
+                
+                // Send email using mailto link
+                const mailtoLink = `mailto:hello@bankero.co?subject=Early Access Request&body=User with email ${email} has requested early access.`;
+                window.location.href = mailtoLink;
+                
+                // Update status text
+                statusText.innerHTML = 'Request sent successfully!<br>';
+                
+                // Clear form
+                document.getElementById('form').reset();
+              }
+            </script>
             <div class="error-message w-form-fail">
               <div class="error-text">Oops! Something went wrong while submitting the form.</div>
             </div>
